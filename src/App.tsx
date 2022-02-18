@@ -6,9 +6,6 @@ import "./App.css";
 export const App = () => {
   const [csv, setCsv] = useState<FileList | null>();
   const [data, setData] = useState<any>(null);
-  const [output, setOutput] = useState<any>({
-    mostExpensive: {},
-  });
 
   const initialRender = useRef(true);
   useEffect(() => {
@@ -16,10 +13,6 @@ export const App = () => {
       initialRender.current = false;
     } else {
       console.log("Finished:", data);
-      setOutput((prevState: any) => ({
-        ...prevState,
-        mostExpensive: findMostExpensive(data),
-      }));
     }
   }, [data]);
 
@@ -34,8 +27,17 @@ export const App = () => {
     }
   };
 
-  const findMostExpensive = (resultArray: any[]) => {
-    return resultArray.sort((a, b) => a.Amount - b.Amount)[0];
+  const findMostExpensivePurchase = (resultArray: any[]) => {
+    const purchase = resultArray.sort((a, b) => a.Amount - b.Amount)[0];
+    const date = purchase.Date;
+    const name = purchase.Name;
+    const amount = `$${Math.abs(purchase.Amount)}`;
+    const balance = `$${Math.abs(purchase.Balance)}`;
+    return (
+      <p>
+        Your most expensive purchase was "{name}" at {amount}
+      </p>
+    );
   };
 
   return (
@@ -54,12 +56,7 @@ export const App = () => {
         <button type="button" onClick={handleOnSubmit}>
           Analyze
         </button>
-        {data && (
-          <p>
-            Your most expensive purchase was "{output.mostExpensive.Name}" at{" "}
-            {`$${Math.abs(output.mostExpensive.Amount)}`}
-          </p>
-        )}
+        {data && findMostExpensivePurchase(data)}
       </header>
     </div>
   );

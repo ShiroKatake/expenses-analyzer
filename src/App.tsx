@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import logo from "./logo.svg";
+import Papa from "papaparse";
+import "./App.css";
 
-function App() {
+export const App = () => {
+  const [csv, setCsv] = useState<FileList | null>();
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    console.log("Finished:", data);
+  }, [data]);
+
+  const handleOnSubmit = () => {
+    if (csv) {
+      Papa.parse(csv[0], {
+        complete: function (results) {
+          setData(results.data);
+        },
+      });
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>Expenses Analyzer</p>
+        <input
+          type="file"
+          name="csv_upload"
+          accept=".csv"
+          onChange={(e) => {
+            setCsv(e.target.files);
+          }}
+        />
+        <button type="button" onClick={handleOnSubmit}>
+          Submit
+        </button>
       </header>
     </div>
   );
-}
-
-export default App;
+};

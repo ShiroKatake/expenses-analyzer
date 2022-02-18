@@ -14,6 +14,7 @@ export const App = () => {
   const handleOnSubmit = () => {
     if (csv) {
       Papa.parse(csv[0], {
+        header: true,
         complete: function (results) {
           setData(results.data);
         },

@@ -27,19 +27,6 @@ export const App = () => {
     }
   };
 
-  const findMostExpensivePurchase = (resultArray: any[]) => {
-    const purchase = resultArray.sort((a, b) => a.Amount - b.Amount)[0];
-    const date = purchase.Date;
-    const name = purchase.Name;
-    const amount = `$${Math.abs(purchase.Amount)}`;
-    const balance = `$${Math.abs(purchase.Balance)}`;
-    return (
-      <p>
-        Your most expensive purchase was "{name}" at {amount}
-      </p>
-    );
-  };
-
   return (
     <div className="App">
       <header className="App-header">
@@ -59,5 +46,18 @@ export const App = () => {
         {data && findMostExpensivePurchase(data)}
       </header>
     </div>
+  );
+};
+
+const findMostExpensivePurchase = (resultArray: any[]) => {
+  const purchase = resultArray.sort((a, b) => a.Amount - b.Amount)[0];
+  const date = purchase.Date;
+  const name = purchase.Name;
+  const amount = `$${Math.abs(purchase.Amount)}`;
+  const balance = `$${Math.abs(purchase.Balance)}`;
+  return (
+    <p>
+      Your most expensive purchase was "{name}" at {amount}
+    </p>
   );
 };

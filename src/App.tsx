@@ -2,26 +2,28 @@ import { useEffect, useRef, useState } from "react";
 import logo from "./logo.svg";
 import Papa from "papaparse";
 import "./App.css";
+import { findMostExpensivePurchase } from "./analysis/findMostExpensivePurchase";
+import { Transaction } from "./types/transaction";
 
 export const App = () => {
   const [csv, setCsv] = useState<FileList | null>();
-  const [data, setData] = useState<any>(null);
+  const [transactionData, setTransactionData] = useState<Transaction[]>([]);
 
   const initialRender = useRef(true);
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false;
     } else {
-      console.log("Finished:", data);
+      console.log("Finished:", transactionData);
     }
-  }, [data]);
+  }, [transactionData]);
 
   const handleOnSubmit = () => {
     if (csv) {
       Papa.parse(csv[0], {
         header: true,
         complete: function (results) {
-          setData(results.data);
+          setTransactionData(results.data as Transaction[]);
         },
       });
     }
@@ -33,6 +35,7 @@ export const App = () => {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Expenses Analyzer</p>
         <input
+          data-testid="csv-input"
           type="file"
           name="csv_upload"
           accept=".csv"
@@ -40,24 +43,11 @@ export const App = () => {
             setCsv(e.target.files);
           }}
         />
-        <button type="button" onClick={handleOnSubmit}>
+        <button data-testid="submit" type="button" onClick={handleOnSubmit}>
           Analyze
         </button>
-        {data && findMostExpensivePurchase(data)}
+        {transactionData.length > 0 && findMostExpensivePurchase(transactionData)}
       </header>
     </div>
-  );
-};
-
-const findMostExpensivePurchase = (resultArray: any[]) => {
-  const purchase = resultArray.sort((a, b) => a.Amount - b.Amount)[0];
-  const date = purchase.Date;
-  const name = purchase.Name;
-  const amount = `$${Math.abs(purchase.Amount)}`;
-  const balance = `$${Math.abs(purchase.Balance)}`;
-  return (
-    <p>
-      Your most expensive purchase was "{name}" at {amount}
-    </p>
   );
 };

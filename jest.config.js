@@ -23,6 +23,7 @@ module.exports = {
   },
   collectCoverageFrom: [
     "<rootDir>/src/analysis/**/*.{js,jsx,ts,tsx}",
+    "<rootDir>/src/components/**/*.{js,jsx,ts,tsx}",
     "<rootDir>/src/utils/*.{js,jsx,ts}",
     "<rootDir>/src/App.tsx",
   ],

@@ -1,9 +1,14 @@
 import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import { App } from "./App";
+import { AppContextProvider } from "./context/AppContext";
 
 describe("App", () => {
-  render(<App />);
+  render(
+    <AppContextProvider>
+      <App />
+    </AppContextProvider>
+  );
   afterEach(() => {
     cleanup();
   });

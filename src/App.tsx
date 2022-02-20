@@ -1,22 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Papa from "papaparse";
 import "./App.css";
 import { findMostExpensivePurchase } from "./analysis/findMostExpensivePurchase";
 import { Transaction } from "./types/transaction";
-import { TransactionList } from "./components/TransactionList";
+import { TransactionList } from "./components/TransactionList/TransactionList";
+import { useAppContext } from "./context/AppContext";
 
 export const App = () => {
   const [csv, setCsv] = useState<FileList | null>();
-  const [transactionData, setTransactionData] = useState<Transaction[]>([]);
 
-  const initialRender = useRef(true);
-  useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-    } else {
-      console.log("Finished:", transactionData);
-    }
-  }, [transactionData]);
+  const { transactionData, setTransactionData } = useAppContext();
 
   const handleOnSubmit = () => {
     if (csv) {
@@ -44,7 +37,7 @@ export const App = () => {
       <button data-testid="submit" type="button" onClick={handleOnSubmit}>
         Analyze
       </button>
-      <TransactionList transactionData={transactionData} />
+      <TransactionList />
       {transactionData.length > 0 && findMostExpensivePurchase(transactionData)}
     </div>
   );

@@ -37,7 +37,7 @@ export const App = () => {
       <button data-testid="submit" type="button" onClick={handleOnSubmit}>
         Analyze
       </button>
-      <TransactionList />
+      {transactionData.length > 0 && <TransactionList />}
       {transactionData.length > 0 && findMostExpensivePurchase(transactionData)}
     </div>
   );

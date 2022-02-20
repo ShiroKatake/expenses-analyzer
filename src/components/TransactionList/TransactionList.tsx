@@ -1,16 +1,16 @@
-import { Transaction } from "../types/transaction";
-import { stringToDate } from "../utils/stringToDate";
+import { useAppContext } from "../../context/AppContext";
+import { stringToDate } from "../../utils/stringToDate";
+import { InlineTextInput } from "../InlineTextInput/InlineTextInput";
 
-interface Transactions {
-  transactionData: Transaction[];
-}
-
-export const TransactionList = ({ transactionData }: Transactions) => {
+export const TransactionList = () => {
+  const { transactionData } = useAppContext();
   const transactionList = transactionData.map((transaction, index) => {
     return (
       <tr key={index}>
         <td>{stringToDate(transaction.date)}</td>
-        <td>{transaction.name}</td>
+        <td>
+          <InlineTextInput transactionIndex={index} />
+        </td>
         <td>{transaction.amount}</td>
         <td>{transaction.balance}</td>
       </tr>

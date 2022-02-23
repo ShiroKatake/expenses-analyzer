@@ -1,5 +1,8 @@
 module.exports = {
   roots: ["<rootDir>/src"],
+  setupFilesAfterEnv: [
+    "<rootDir>/src/setuptests.ts"
+  ],
   transform: {
     "^.+\\.tsx?$": "ts-jest",
     "^.+\\.svg$": "<rootDir>/svgTransform.js"

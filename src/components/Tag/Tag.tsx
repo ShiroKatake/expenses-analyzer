@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useTagListContext } from "./TagManager";
+import { useTagListContext } from "../TagManager/TagManager";
 import { AddIcon, IconContainer, RemoveIcon, TagContainer, TagNameInput } from "./Tag.styled";
 
 export interface ITagProps {

@@ -5,7 +5,7 @@ import { findMostExpensivePurchase } from "./analysis/findMostExpensivePurchase"
 import { Transaction } from "./types/transaction";
 import { TransactionList } from "./components/TransactionList/TransactionList";
 import { useAppContext } from "./context/AppContext";
-import { TagManager } from "./components/Tag/TagManager";
+import { TagManager } from "./components/TagManager/TagManager";
 
 export const App = () => {
   const [csv, setCsv] = useState<FileList | null>();

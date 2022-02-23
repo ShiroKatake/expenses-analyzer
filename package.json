@@ -38,6 +38,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "jest --env=jsdom --coverage",
+    "watch": "jest --watch --env=jsdom --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

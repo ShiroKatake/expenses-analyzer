@@ -39,7 +39,7 @@ export const Tag = ({ tagId, tagName }: ITagProps) => {
         onChange={setText}
       />
       {isUsed && (
-        <IconContainer onClick={() => removeTag(tagId)}>
+        <IconContainer data-testid="remove-tag" onClick={() => removeTag(tagId)}>
           <RemoveIcon />
         </IconContainer>
       )}

@@ -5,6 +5,7 @@ import { findMostExpensivePurchase } from "./analysis/findMostExpensivePurchase"
 import { Transaction } from "./types/transaction";
 import { TransactionList } from "./components/TransactionList/TransactionList";
 import { useAppContext } from "./context/AppContext";
+import { TagManager } from "./components/Tag/TagManager";
 
 export const App = () => {
   const [csv, setCsv] = useState<FileList | null>();
@@ -37,6 +38,7 @@ export const App = () => {
       <button data-testid="submit" type="button" onClick={handleOnSubmit}>
         Analyze
       </button>
+      <TagManager />
       {transactionData.length > 0 && <TransactionList />}
       {transactionData.length > 0 && findMostExpensivePurchase(transactionData)}
     </div>

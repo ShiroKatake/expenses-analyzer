@@ -1,23 +1,13 @@
 import { useAppContext } from "../../context/AppContext";
-import { stringToDate } from "../../utils/stringToDate";
-import { InlineTextInput } from "../InlineTextInput/InlineTextInput";
+import { TransactionItem } from "../TransactionItem/TransactionItem";
 import { StyledTable } from "./TransactionList.styled";
 
 export const TransactionList = () => {
   const { transactionData } = useAppContext();
-  const transactionList = transactionData.map((transaction, index) => {
-    return (
-      <tr key={index}>
-        <td>{stringToDate(transaction.date)}</td>
-        <td>
-          <InlineTextInput transactionIndex={index} />
-        </td>
-        <td>{transaction.amount}</td>
-        <td>{transaction.balance}</td>
-        <td></td>
-      </tr>
-    );
-  });
+
+  const transactionItems = transactionData.map((transaction, index) => (
+    <TransactionItem key={index} transaction={transaction} index={index} />
+  ));
 
   return (
     <StyledTable>
@@ -30,7 +20,7 @@ export const TransactionList = () => {
           <th>Tag</th>
         </tr>
       </thead>
-      <tbody>{transactionList}</tbody>
+      <tbody>{transactionItems}</tbody>
     </StyledTable>
   );
 };

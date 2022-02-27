@@ -3,22 +3,17 @@ import { StyledInlineTextInput } from "./InlineTextInput.styled";
 import "react-edit-text/dist/index.css";
 
 interface InlineTextInputProps {
+  transactionName: string;
   transactionIndex: number;
 }
 
-export const InlineTextInput = ({ transactionIndex }: InlineTextInputProps) => {
-  const { transactionData, setTransactionData } = useAppContext();
-
-  const handleOnSave = ({ value }: any) => {
-    let copiedTransactions = JSON.parse(JSON.stringify(transactionData));
-    copiedTransactions[transactionIndex].name = value;
-    setTransactionData(copiedTransactions);
-  };
+export const InlineTextInput = ({ transactionName, transactionIndex }: InlineTextInputProps) => {
+  const { updateTransactionName } = useAppContext();
 
   return (
     <StyledInlineTextInput
-      defaultValue={transactionData[transactionIndex].name}
-      onSave={handleOnSave}
+      defaultValue={transactionName}
+      onSave={({ value }) => updateTransactionName(value, transactionIndex)}
     />
   );
 };

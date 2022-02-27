@@ -4,6 +4,7 @@ import { Transaction } from "../types/transaction";
 export interface IAppContext {
   transactionData: Transaction[];
   setTransactionData: (val: Transaction[]) => void;
+  updateTransactionName: (transactionName: string, index: number) => void;
 }
 
 export interface IAppContextProps {
@@ -26,9 +27,16 @@ export const AppContextProvider = ({ mockData, children }: IAppContextProps) => 
     }
   }, [transactionData]);
 
+  const updateTransactionName = (transactionName: string, index: number) => {
+    let deepCopy = JSON.parse(JSON.stringify(transactionData));
+    deepCopy[index].name = transactionName;
+    setTransactionData(deepCopy);
+  };
+
   const appContext: IAppContext = {
     transactionData,
     setTransactionData,
+    updateTransactionName,
   };
 
   return <AppContext.Provider value={appContext}>{children}</AppContext.Provider>;

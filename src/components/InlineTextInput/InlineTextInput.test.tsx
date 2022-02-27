@@ -7,14 +7,14 @@ import transactionData from "../../mocks/transactionData";
 describe("InlineTextInput", () => {
   const { container } = render(
     <AppContextProvider mockData={transactionData}>
-      <InlineTextInput transactionIndex={0} />
+      <InlineTextInput transactionName="Purchase A" transactionIndex={0} />
     </AppContextProvider>
   );
   afterEach(() => {
     cleanup();
   });
 
-  it("should update transaction name after editing input", async () => {
+  it("should update transaction name after editing input", () => {
     let inputDiv = screen.getByText("Purchase A");
     fireEvent.click(inputDiv);
     expect(inputDiv).not.toBeInTheDocument();

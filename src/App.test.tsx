@@ -19,8 +19,7 @@ describe("App", () => {
         `date,name,amount,balance
         01-Apr-20,Purchase A,10,110
         02-Apr-20,Purchase B,-13.23,96.77
-        02-Apr-20,Purchase C,-200,-103.23
-        `,
+        02-Apr-20,Purchase C,-200,-103.23`,
       ],
       "transactions.csv",
       { type: "text/csv" }

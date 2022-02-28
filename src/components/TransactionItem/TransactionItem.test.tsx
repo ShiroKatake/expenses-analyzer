@@ -18,7 +18,7 @@ describe("TransactionItem", () => {
 
   it("should update transaction name after editing input", () => {
     let inputDiv = screen.getByText("Purchase A");
-    fireEvent.mouseEnter(inputDiv);
+    fireEvent.mouseOver(inputDiv);
     fireEvent.keyPress(inputDiv, { key: "KeyT", charCode: 84 });
     expect(component).toMatchSnapshot();
   });

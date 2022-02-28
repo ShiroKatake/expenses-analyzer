@@ -23,7 +23,7 @@ export const AppContextProvider = ({ mockData, children }: IAppContextProps) => 
     if (initialRender.current) {
       initialRender.current = false;
     } else {
-      console.log("Finished:", transactionData);
+      // console.log("Finished:", transactionData);
     }
   }, [transactionData]);
 

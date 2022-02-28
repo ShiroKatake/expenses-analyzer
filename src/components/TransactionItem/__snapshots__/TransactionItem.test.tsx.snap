@@ -8,58 +8,82 @@ Object {
       <table>
         <tbody>
           <tr>
-            <td>
+            <td
+              data-testid="date"
+            >
               01 Apr 2020
             </td>
-            <td>
+            <td
+              data-testid="name"
+            >
               <div
                 class="_1EEDX _3sXmF sc-bdvvtL iErRBy"
               >
                 Purchase A
               </div>
             </td>
-            <td>
+            <td
+              data-testid="amount"
+            >
               10
             </td>
-            <td>
+            <td
+              data-testid="balance"
+            >
               110
             </td>
             <td />
           </tr>
           <tr>
-            <td>
+            <td
+              data-testid="date"
+            >
               02 Apr 2020
             </td>
-            <td>
+            <td
+              data-testid="name"
+            >
               <div
                 class="_1EEDX _3sXmF sc-bdvvtL iErRBy"
               >
                 Purchase B
               </div>
             </td>
-            <td>
+            <td
+              data-testid="amount"
+            >
               -13.23
             </td>
-            <td>
+            <td
+              data-testid="balance"
+            >
               96.77
             </td>
             <td />
           </tr>
           <tr>
-            <td>
-              02 Apr 2020
+            <td
+              data-testid="date"
+            >
+              03 Apr 2020
             </td>
-            <td>
+            <td
+              data-testid="name"
+            >
               <div
                 class="_1EEDX _3sXmF sc-bdvvtL iErRBy"
               >
                 Purchase C
               </div>
             </td>
-            <td>
+            <td
+              data-testid="amount"
+            >
               -200
             </td>
-            <td>
+            <td
+              data-testid="balance"
+            >
               -103.23
             </td>
             <td />
@@ -72,58 +96,82 @@ Object {
     <table>
       <tbody>
         <tr>
-          <td>
+          <td
+            data-testid="date"
+          >
             01 Apr 2020
           </td>
-          <td>
+          <td
+            data-testid="name"
+          >
             <div
               class="_1EEDX _3sXmF sc-bdvvtL iErRBy"
             >
               Purchase A
             </div>
           </td>
-          <td>
+          <td
+            data-testid="amount"
+          >
             10
           </td>
-          <td>
+          <td
+            data-testid="balance"
+          >
             110
           </td>
           <td />
         </tr>
         <tr>
-          <td>
+          <td
+            data-testid="date"
+          >
             02 Apr 2020
           </td>
-          <td>
+          <td
+            data-testid="name"
+          >
             <div
               class="_1EEDX _3sXmF sc-bdvvtL iErRBy"
             >
               Purchase B
             </div>
           </td>
-          <td>
+          <td
+            data-testid="amount"
+          >
             -13.23
           </td>
-          <td>
+          <td
+            data-testid="balance"
+          >
             96.77
           </td>
           <td />
         </tr>
         <tr>
-          <td>
-            02 Apr 2020
+          <td
+            data-testid="date"
+          >
+            03 Apr 2020
           </td>
-          <td>
+          <td
+            data-testid="name"
+          >
             <div
               class="_1EEDX _3sXmF sc-bdvvtL iErRBy"
             >
               Purchase C
             </div>
           </td>
-          <td>
+          <td
+            data-testid="amount"
+          >
             -200
           </td>
-          <td>
+          <td
+            data-testid="balance"
+          >
             -103.23
           </td>
           <td />

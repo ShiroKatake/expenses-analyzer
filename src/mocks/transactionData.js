@@ -12,7 +12,7 @@ module.exports = [
     balance: 96.77,
   },
   {
-    date: "02-Apr-20",
+    date: "03-Apr-20",
     name: "Purchase C",
     amount: -200,
     balance: -103.23,

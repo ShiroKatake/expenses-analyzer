@@ -22,29 +22,25 @@ export const TransactionItem = ({ transaction, index }: ITransactionItemProps) =
       }
     };
 
-    if (rowRef.current !== null) {
-      document.addEventListener("keydown", handleKeyDown);
-      rowRef.current.addEventListener("mouseenter", () => (isHovered = true));
-      rowRef.current.addEventListener("mouseleave", () => (isHovered = false));
-    }
+    document.addEventListener("keydown", handleKeyDown);
+    rowRef.current?.addEventListener("mouseenter", () => (isHovered = true));
+    rowRef.current?.addEventListener("mouseleave", () => (isHovered = false));
 
     return function cleanup() {
-      if (rowRef.current !== null) {
-        document.removeEventListener("keydown", handleKeyDown);
-        rowRef.current.removeEventListener("mouseenter", () => (isHovered = true));
-        rowRef.current.removeEventListener("mouseleave", () => (isHovered = false));
-      }
+      document.removeEventListener("keydown", handleKeyDown);
+      rowRef.current?.removeEventListener("mouseenter", () => (isHovered = true));
+      rowRef.current?.removeEventListener("mouseleave", () => (isHovered = false));
     };
   }, []);
 
   return (
     <tr ref={rowRef}>
-      <td>{stringToDate(transaction.date)}</td>
-      <td>
+      <td data-testid="date">{stringToDate(transaction.date)}</td>
+      <td data-testid="name">
         <InlineTextInput transactionName={transaction.name} transactionIndex={index} />
       </td>
-      <td>{transaction.amount}</td>
-      <td>{transaction.balance}</td>
+      <td data-testid="amount">{transaction.amount}</td>
+      <td data-testid="balance">{transaction.balance}</td>
       <td></td>
     </tr>
   );

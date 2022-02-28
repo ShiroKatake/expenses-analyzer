@@ -2,11 +2,12 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { InlineTextInput } from "./InlineTextInput";
 import { AppContextProvider } from "../../context/AppContext";
-import transactionData from "../../mocks/transactionData";
+import { TransactionContextInitializer } from "../../mocks/TransactionContextInitializer";
 
 describe("InlineTextInput", () => {
   const { container } = render(
-    <AppContextProvider mockData={transactionData}>
+    <AppContextProvider>
+      <TransactionContextInitializer />
       <InlineTextInput transactionName="Purchase A" transactionIndex={0} />
     </AppContextProvider>
   );

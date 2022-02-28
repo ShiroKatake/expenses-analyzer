@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { ITagProps, Tag } from "../Tag/Tag";
+import { ITagProps, Tag } from "..";
 import { StyledTagArrayContainer } from "./TagManager.styled";
 
 interface ITagListContext {

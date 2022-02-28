@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { stringToDate } from "../../utils/stringToDate";
-import { InlineTextInput } from "../InlineTextInput/InlineTextInput";
+import { InlineTextInput } from "..";
 import { Transaction } from "../../types/transaction";
 
 interface ITransactionItemProps {

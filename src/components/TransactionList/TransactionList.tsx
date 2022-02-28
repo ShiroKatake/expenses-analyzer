@@ -1,5 +1,5 @@
+import { TransactionItem } from "..";
 import { useAppContext } from "../../context/AppContext";
-import { TransactionItem } from "../TransactionItem/TransactionItem";
 import { StyledTable } from "./TransactionList.styled";
 
 export const TransactionList = () => {

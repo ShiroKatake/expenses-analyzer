@@ -1,5 +1,4 @@
-import { TagManager } from "./components/TagManager/TagManager";
-import { FileInput } from "./components/FileInput/FileInput";
+import { TagManager, FileInput } from "./components";
 import "./App.css";
 
 export const App = () => {

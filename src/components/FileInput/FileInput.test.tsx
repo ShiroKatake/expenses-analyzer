@@ -1,19 +1,28 @@
 import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import user from "@testing-library/user-event";
-import { App } from "./App";
-import { AppContextProvider } from "./context/AppContext";
+import { AppContextProvider, useAppContext } from "../../context/AppContext";
+import { FileInput } from "./FileInput";
 
-describe("App", () => {
+const OutputTest = () => {
+  const { transactionData } = useAppContext();
+  const transactions = transactionData.map((transaction, index) => {
+    return <p key={index}>{transaction.name}</p>;
+  });
+  return <>{transactions}</>;
+};
+
+describe("File Input", () => {
   render(
     <AppContextProvider>
-      <App />
+      <FileInput />
+      <OutputTest />
     </AppContextProvider>
   );
   afterEach(() => {
     cleanup();
   });
 
-  it("should not work with these edge cases", async () => {
+  it("should load in correct data", async () => {
     const file = new File(
       [
         `date,name,amount,balance
@@ -36,8 +45,11 @@ describe("App", () => {
     });
 
     await waitFor(() => {
-      const text = screen.getByTestId("most-expensive");
-      expect(text).toBeTruthy();
+      const text = screen.getByText("Purchase A");
+      expect(text).toBeInTheDocument();
+
+      const nonExistentText = screen.queryByText("Purchase D");
+      expect(nonExistentText).toBe(null);
     });
   });
 });

@@ -1,4 +1,4 @@
-import { TagManager, FileInput } from "./components";
+import { TagManager, FileInput, TransactionList } from "./components";
 import "./App.css";
 
 export const App = () => {
@@ -7,8 +7,8 @@ export const App = () => {
       <p>Expenses Analyzer</p>
       <FileInput />
       <TagManager />
-      {/* {transactionData.length > 0 && <TransactionList />}
-      {transactionData.length > 0 && findMostExpensivePurchase(transactionData)} */}
+      <TransactionList />
+      {/* {transactionData.length > 0 && findMostExpensivePurchase(transactionData)} */}
     </div>
   );
 };

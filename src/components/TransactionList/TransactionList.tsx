@@ -10,17 +10,21 @@ export const TransactionList = () => {
   ));
 
   return (
-    <StyledTable>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Transaction Name</th>
-          <th>Amount</th>
-          <th>Balance</th>
-          <th>Tag</th>
-        </tr>
-      </thead>
-      <tbody>{transactionItems}</tbody>
-    </StyledTable>
+    <>
+      {transactionData.length > 0 && (
+        <StyledTable>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Transaction Name</th>
+              <th>Amount</th>
+              <th>Balance</th>
+              <th>Tag</th>
+            </tr>
+          </thead>
+          <tbody>{transactionItems}</tbody>
+        </StyledTable>
+      )}
+    </>
   );
 };

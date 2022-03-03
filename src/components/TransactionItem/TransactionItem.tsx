@@ -14,7 +14,7 @@ export const TransactionItem = ({ transaction, index }: ITransactionItemProps) =
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.repeat || !isHovered) {
+      if (!isHovered || event.repeat) {
         return;
       }
       if (event.code === "KeyT") {
@@ -23,13 +23,17 @@ export const TransactionItem = ({ transaction, index }: ITransactionItemProps) =
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    rowRef.current?.addEventListener("mouseenter", () => (isHovered = true));
-    rowRef.current?.addEventListener("mouseleave", () => (isHovered = false));
+    if (rowRef.current) {
+      rowRef.current.addEventListener("mouseenter", () => (isHovered = true));
+      rowRef.current.addEventListener("mouseleave", () => (isHovered = false));
+    }
 
     return function cleanup() {
       document.removeEventListener("keydown", handleKeyDown);
-      rowRef.current?.removeEventListener("mouseenter", () => (isHovered = true));
-      rowRef.current?.removeEventListener("mouseleave", () => (isHovered = false));
+      if (rowRef.current) {
+        rowRef.current.removeEventListener("mouseenter", () => (isHovered = true));
+        rowRef.current.removeEventListener("mouseleave", () => (isHovered = false));
+      }
     };
   }, []);
 

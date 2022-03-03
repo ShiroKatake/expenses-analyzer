@@ -1,6 +1,7 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import { TransactionItem } from "./TransactionItem";
 import transactionData from "../../mocks/transactionData";
+import userEvent from "@testing-library/user-event";
 
 describe("TransactionItem", () => {
   const component = render(
@@ -17,9 +18,10 @@ describe("TransactionItem", () => {
   });
 
   it("should update transaction name after editing input", () => {
-    let inputDiv = screen.getByText("Purchase A");
-    fireEvent.mouseOver(inputDiv);
-    fireEvent.keyPress(inputDiv, { key: "KeyT", charCode: 84 });
+    let inputDiv = screen.getByText("02 Apr 2020");
+    userEvent.hover(inputDiv);
+    userEvent.keyboard("t");
+    userEvent.unhover(inputDiv);
     expect(component).toMatchSnapshot();
   });
 });

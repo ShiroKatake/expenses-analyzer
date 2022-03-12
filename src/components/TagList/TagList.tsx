@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { ITagProps, Tag } from "..";
 import { useAppContext } from "../../context/AppContext";
-import { StyledTagArrayContainer } from "./TagManager.styled";
+import { StyledTagArrayContainer } from "./TagList.styled";
 
 interface ITagListContext {
   addTag: (tagName: string, id: string) => void;

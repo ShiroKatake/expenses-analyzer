@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { TagManager } from "./TagManager";
+import { TagManager } from "./TagList";
 
 describe("TagManager", () => {
   const { container } = render(<TagManager />);

@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { ITagProps, Tag } from "..";
+import { useAppContext } from "../../context/AppContext";
 import { StyledTagArrayContainer } from "./TagManager.styled";
 
 interface ITagListContext {
@@ -13,6 +14,7 @@ export const useTagListContext = () => useContext(TagListContext);
 
 export const TagManager = () => {
   const MAX_TAG_SIZE = 10;
+  const { isHidden } = useAppContext();
   const [tagArray, setTagList] = useState<ITagProps[]>([
     {
       tagId: "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
@@ -26,10 +28,7 @@ export const TagManager = () => {
 
   const updateTag = (tagName: string, id: string) => {
     let updatedTagArray = tagArray.map((tag) => {
-      if (tag.tagId == id) {
-        return { ...tag, tagName: tagName };
-      }
-      return tag;
+      return { ...tag, tagName: tagName };
     });
     setTagList(updatedTagArray);
   };
@@ -51,8 +50,12 @@ export const TagManager = () => {
   });
 
   return (
-    <TagListContext.Provider value={tagListContext}>
-      <StyledTagArrayContainer>{subsequentTags}</StyledTagArrayContainer>
-    </TagListContext.Provider>
+    <>
+      {!isHidden &&
+        <TagListContext.Provider value={tagListContext}>
+          <StyledTagArrayContainer>{subsequentTags}</StyledTagArrayContainer>
+        </TagListContext.Provider>
+      }
+    </>
   );
 };

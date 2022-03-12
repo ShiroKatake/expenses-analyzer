@@ -4,7 +4,7 @@ import { StyledInlineTextInput } from "../InlineTextInput/InlineTextInput.styled
 
 export const TagContainer = styled.div`
   display: flex;
-  margin-right: 10px;
+  margin-top: 5px;
   border-radius: 5px;
   background-color: orange;
 `;
@@ -23,8 +23,6 @@ export const TagNameInput = styled(StyledInlineTextInput)`
 export const IconContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-items: center;
-  height: 100%;
 `;
 
 export const AddIcon = styled(GoPlus)`

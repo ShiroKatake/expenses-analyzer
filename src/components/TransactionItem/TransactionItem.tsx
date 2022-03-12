@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { stringToDate } from "../../utils/stringToDate";
 import { InlineTextInput } from "..";
 import { Transaction } from "../../types/transaction";
+import { useAppContext } from "../../context/AppContext";
 
 interface ITransactionItemProps {
   transaction: Transaction;
@@ -9,6 +10,7 @@ interface ITransactionItemProps {
 }
 
 export const TransactionItem = ({ transaction, index }: ITransactionItemProps) => {
+  const { setIsHidden } = useAppContext();
   const rowRef = useRef<HTMLTableRowElement>(null);
   let isHovered = false;
 
@@ -19,10 +21,17 @@ export const TransactionItem = ({ transaction, index }: ITransactionItemProps) =
       }
       if (event.code === "KeyT") {
         console.log(`Add tag item ${index}`);
+        setIsHidden(false);
+        // Set position
       }
     };
 
+    const handleClickOutside = () => {
+      setIsHidden(true);
+    }
+
     document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
     if (rowRef.current) {
       rowRef.current.addEventListener("mouseenter", () => (isHovered = true));
       rowRef.current.addEventListener("mouseleave", () => (isHovered = false));
@@ -30,6 +39,8 @@ export const TransactionItem = ({ transaction, index }: ITransactionItemProps) =
 
     return function cleanup() {
       document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
+      /* istanbul ignore next */
       if (rowRef.current) {
         rowRef.current.removeEventListener("mouseenter", () => (isHovered = true));
         rowRef.current.removeEventListener("mouseleave", () => (isHovered = false));

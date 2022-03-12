@@ -3,8 +3,10 @@ import { Transaction } from "../types/transaction";
 
 export interface IAppContext {
   transactionData: Transaction[];
+  isHidden: boolean;
   setTransactionData: (val: Transaction[]) => void;
   updateTransactionName: (transactionName: string, index: number) => void;
+  setIsHidden: (val: boolean) => void;
 }
 
 export interface IAppContextProps {
@@ -17,15 +19,16 @@ export const useAppContext = () => useContext(AppContext);
 
 export const AppContextProvider = ({ mockData, children }: IAppContextProps) => {
   const [transactionData, setTransactionData] = useState<Transaction[]>(mockData || []);
+  const [isHidden, setIsHidden] = useState(true);
 
-  const initialRender = useRef(true);
-  useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-    } else {
-      // console.log("Finished:", transactionData);
-    }
-  }, [transactionData]);
+  // const initialRender = useRef(true);
+  // useEffect(() => {
+  //   if (initialRender.current) {
+  //     initialRender.current = false;
+  //   } else {
+  //     console.log("Finished:", transactionData);
+  //   }
+  // }, [transactionData]);
 
   const updateTransactionName = (transactionName: string, index: number) => {
     let deepCopy = JSON.parse(JSON.stringify(transactionData));
@@ -35,8 +38,10 @@ export const AppContextProvider = ({ mockData, children }: IAppContextProps) => 
 
   const appContext: IAppContext = {
     transactionData,
+    isHidden,
     setTransactionData,
     updateTransactionName,
+    setIsHidden,
   };
 
   return <AppContext.Provider value={appContext}>{children}</AppContext.Provider>;

@@ -6,8 +6,9 @@ import { AppContextProvider } from "../../context/AppContext";
 import { TagManager } from "..";
 
 describe("TransactionItem", () => {
+  let renderContainer: HTMLElement;
   beforeEach(() => {
-    render(
+    const { container } = render(
       <AppContextProvider>
         <TagManager />
         <table>
@@ -19,6 +20,7 @@ describe("TransactionItem", () => {
         </table>
       </AppContextProvider>
     );
+    renderContainer = container;
   });
 
   afterEach(() => {
@@ -32,7 +34,7 @@ describe("TransactionItem", () => {
 
   it("should show tag list when pressed T and row is hovered", () => {
     tryBringUpTagList();
-    expect(screen.queryByText("New tag")).toBeTruthy();
+    expect(screen.getByText("New tag")).toBeTruthy();
   });
 
   it("should hide tag list when clicked outside of component", () => {
@@ -41,6 +43,13 @@ describe("TransactionItem", () => {
     userEvent.unhover(inputDiv);
     userEvent.click(document.body);
     expect(screen.queryByText("New tag")).toBeFalsy();
+  });
+
+  it("should not hide tag list when clicked on tag list", () => {
+    tryBringUpTagList();
+    const tag = screen.getByText("New tag");
+    userEvent.click(tag);
+    expect(renderContainer.querySelector("input")).toBeTruthy();
   });
 });
 

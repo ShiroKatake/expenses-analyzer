@@ -26,12 +26,7 @@ export const TransactionItem = ({ transaction, index }: ITransactionItemProps) =
       }
     };
 
-    const handleClickOutside = () => {
-      setIsHidden(true);
-    }
-
     document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("mousedown", handleClickOutside);
     if (rowRef.current) {
       rowRef.current.addEventListener("mouseenter", () => (isHovered = true));
       rowRef.current.addEventListener("mouseleave", () => (isHovered = false));
@@ -39,7 +34,6 @@ export const TransactionItem = ({ transaction, index }: ITransactionItemProps) =
 
     return function cleanup() {
       document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("mousedown", handleClickOutside);
       /* istanbul ignore next */
       if (rowRef.current) {
         rowRef.current.removeEventListener("mouseenter", () => (isHovered = true));

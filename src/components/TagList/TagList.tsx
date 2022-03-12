@@ -1,6 +1,7 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 import { ITagProps, Tag } from "..";
 import { useAppContext } from "../../context/AppContext";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 import { StyledTagArrayContainer } from "./TagList.styled";
 
 interface ITagListContext {
@@ -14,13 +15,16 @@ export const useTagListContext = () => useContext(TagListContext);
 
 export const TagManager = () => {
   const MAX_TAG_SIZE = 10;
-  const { isHidden } = useAppContext();
+  const { isHidden, setIsHidden } = useAppContext();
+  const tagListRef = useRef<HTMLDivElement>(null)
   const [tagArray, setTagList] = useState<ITagProps[]>([
     {
       tagId: "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
       tagName: "",
     },
   ]);
+
+  useOutsideClick(tagListRef, () => setIsHidden(true));
 
   const addTag = (tagName: string, id: string) => {
     setTagList((existingArray) => [...existingArray, { tagId: id, tagName }]);
@@ -53,7 +57,7 @@ export const TagManager = () => {
     <>
       {!isHidden &&
         <TagListContext.Provider value={tagListContext}>
-          <StyledTagArrayContainer>{subsequentTags}</StyledTagArrayContainer>
+          <StyledTagArrayContainer ref={tagListRef}>{subsequentTags}</StyledTagArrayContainer>
         </TagListContext.Provider>
       }
     </>

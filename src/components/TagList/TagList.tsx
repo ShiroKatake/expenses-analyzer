@@ -1,11 +1,13 @@
-import { createContext, useContext, useRef, useState } from "react";
-import { ITagProps, Tag } from "..";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { useAppContext } from "../../context/AppContext";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import { StyledTagArrayContainer } from "./TagList.styled";
+import { ITagProps, Tag } from "..";
+import { usePrevious } from "../../hooks/usePrevious";
 
 interface ITagListContext {
-  addTag: (tagName: string, id: string) => void;
+  addEmptyTag: () => void;
   updateTag: (tagName: string, id: string) => void;
   removeTag: (tagId: string) => void;
 }
@@ -14,25 +16,37 @@ const TagListContext = createContext({} as ITagListContext);
 export const useTagListContext = () => useContext(TagListContext);
 
 export const TagManager = () => {
-  const MAX_TAG_SIZE = 10;
+  const MAX_TAG_COUNT = 10;
   const { isHidden, setIsHidden } = useAppContext();
-  const tagListRef = useRef<HTMLDivElement>(null)
+  const tagListRef = useRef<HTMLDivElement>(null);
+  const newestTagRef = useRef<HTMLButtonElement>(null);
   const [tagArray, setTagList] = useState<ITagProps[]>([
     {
       tagId: "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
-      tagName: "",
+      tagName: "Add tag",
     },
   ]);
 
   useOutsideClick(tagListRef, () => setIsHidden(true));
 
-  const addTag = (tagName: string, id: string) => {
-    setTagList((existingArray) => [...existingArray, { tagId: id, tagName }]);
+  const previousTagArray = usePrevious(tagArray);
+  useEffect(() => {
+    if (tagArray.length > previousTagArray?.length) {
+      newestTagRef.current?.click();
+    }
+  }, [tagArray]);
+
+
+  const addEmptyTag = () => {
+    setTagList((existingArray) => [...existingArray, { tagId: uuidv4(), tagName: "Add tag" }]);
   };
 
   const updateTag = (tagName: string, id: string) => {
     let updatedTagArray = tagArray.map((tag) => {
-      return { ...tag, tagName: tagName };
+      if (tag.tagId == id) {
+        return { ...tag, tagName: tagName };
+      }
+      return tag;
     });
     setTagList(updatedTagArray);
   };
@@ -42,14 +56,21 @@ export const TagManager = () => {
   };
 
   const tagListContext: ITagListContext = {
-    addTag,
+    addEmptyTag,
     updateTag,
     removeTag,
   };
 
-  const subsequentTags = tagArray.map((tag, index) => {
-    if (index < MAX_TAG_SIZE) {
-      return <Tag key={tag.tagId} tagId={tag.tagId} tagName={tag.tagName} />;
+  const tags = tagArray.map((tag, index) => {
+    if (index < MAX_TAG_COUNT) {
+      return (
+        <Tag
+          tagRef={index === tagArray.length - 1 ? newestTagRef : undefined}
+          key={tag.tagId}
+          tagId={tag.tagId}
+          tagName={tag.tagName}
+        />
+      );
     }
   });
 
@@ -57,7 +78,7 @@ export const TagManager = () => {
     <>
       {!isHidden &&
         <TagListContext.Provider value={tagListContext}>
-          <StyledTagArrayContainer ref={tagListRef}>{subsequentTags}</StyledTagArrayContainer>
+          <StyledTagArrayContainer ref={tagListRef}>{tags}</StyledTagArrayContainer>
         </TagListContext.Provider>
       }
     </>

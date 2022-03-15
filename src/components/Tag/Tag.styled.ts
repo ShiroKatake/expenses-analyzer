@@ -1,38 +1,26 @@
 import styled from "styled-components";
-import { GoPlus, GoX } from "react-icons/go";
-import { StyledInlineTextInput } from "../InlineTextInput/InlineTextInput.styled";
 
-export const TagContainer = styled.div`
-  display: flex;
-  margin-top: 5px;
-  border-radius: 5px;
-  background-color: orange;
+export const StyledTagContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 250px;
 `;
 
-export const TagNameInput = styled(StyledInlineTextInput)`
-  margin: 5px;
-  padding: 2px 4px 4px 4px;
-  color: black;
-  background-color: orange;
-  font-weight: 500;
-  :hover {
-    background: rgba(0, 0, 0, 0.2);
-  }
+export const StyledInput = styled.input`
+  width: 192px;
 `;
 
-export const IconContainer = styled.div`
+interface IStyledButtonProps {
+  add?: boolean;
+}
+
+export const StyledButton = styled.button<IStyledButtonProps>`
   display: flex;
   align-items: center;
+  justify-content: ${props => props.add ? "center" : "left"};
 `;
 
-export const AddIcon = styled(GoPlus)`
-  margin-left: 7px;
-`;
-
-export const RemoveIcon = styled(GoX)`
-  margin-right: 10px;
-  :hover {
-    cursor: pointer;
-    color: rgba(0, 0, 0, 0.2);
-  }
+export const StyledTagButton = styled(StyledButton)`
+  width: 200px;
+  text-overflow: ellipsis;
 `;

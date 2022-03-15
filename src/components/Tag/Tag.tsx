@@ -73,8 +73,8 @@ export const Tag = ({ onClick, tagName, tagId, tagRef }: ITagProps) => {
       }
       {isUsed() &&
         <>
-          <StyledButton onClick={() => setInputOn(true)}><MdEdit /></StyledButton>
-          <StyledButton onClick={() => removeTag(tagId)}><GoX /></StyledButton>
+          <StyledButton onClick={() => setInputOn(true)} data-testid="edit-tag"><MdEdit /></StyledButton>
+          <StyledButton onClick={() => removeTag(tagId)} data-testid="remove-tag"><GoX /></StyledButton>
         </>
       }
     </StyledTagContainer>

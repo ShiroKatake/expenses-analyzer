@@ -1,27 +1,59 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { TagManager } from "./TagList";
 
 describe("TagManager", () => {
-  const { container } = render(<TagManager />);
+  let renderContainer: any;
+  beforeEach(() => {
+    const { container } = render(<TagManager />);
+    renderContainer = container;
+  });
   afterEach(() => {
     cleanup();
   });
 
-  it("integration testing", async () => {
-    let inputDiv = screen.getByText("New tag");
-    fireEvent.click(inputDiv);
-    expect(inputDiv).not.toBeInTheDocument();
+  it("should switch from button to text input on click", async () => {
+    const { textInput, inputButton } = testSetup(renderContainer);
 
-    const input = container.querySelector("input") as HTMLInputElement;
-    userEvent.type(input, "abc{enter}");
-    expect(input.value).toBe("abc");
+    expect(inputButton).not.toBeInTheDocument();
+    expect(textInput).toBeInTheDocument();
+  });
 
-    inputDiv = screen.getByText("New tag");
-    expect(inputDiv).toBeInTheDocument();
+  it("should add new tag", async () => {
+    const { textInput } = testSetup(renderContainer);
+    userEvent.type(textInput, "abc{enter}");
+
+    const updatedInputButton = screen.getByRole("button", { name: "abc" });
+    expect(updatedInputButton).toBeInTheDocument();
+    expect(textInput).not.toBeInTheDocument();
+  });
+
+  it("should edit when clicked edit button", async () => {
+    const { textInput } = testSetup(renderContainer);
+    userEvent.type(textInput, "a{enter}");
+
+    const editButton = screen.getByTestId("edit-tag");
+    userEvent.click(editButton);
+    const newTextInput = renderContainer.querySelector("input") as HTMLInputElement;
+    userEvent.type(newTextInput, "bc{enter}");
+
+    const updatedInputButton = screen.getByRole("button", { name: "bc" });
+    expect(updatedInputButton).toBeInTheDocument();
+  });
+
+  it("should remove when clicked remove button", async () => {
+    const { textInput } = testSetup(renderContainer);
+    userEvent.type(textInput, "a{enter}");
 
     const removeButton = screen.getByTestId("remove-tag");
-    fireEvent.click(removeButton);
-    expect(input).not.toBeInTheDocument();
+    userEvent.click(removeButton);
+    expect(textInput).not.toBeInTheDocument();
   });
 });
+
+const testSetup = (renderContainer: any) => {
+  const inputButton = screen.getByText("Add tag");
+  userEvent.click(inputButton);
+  const textInput = renderContainer.querySelector("input") as HTMLInputElement;
+  return { textInput, inputButton };
+}

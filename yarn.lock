@@ -7248,10 +7248,10 @@ react-dom@^17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-edit-text@^4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/react-edit-text/-/react-edit-text-4.3.0.tgz#7d1f8e18b8e3f5cf34e9a24159cfe0a11a71d1b7"
-  integrity sha512-5peNJuIDD4VAVYn2JZklThjU3okyHCljlIGQHjWronmPIqiRYGrP27hCF7UzBaTFK//BMeveiKyMkXiCN6wBCg==
+react-edit-text@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/react-edit-text/-/react-edit-text-4.4.0.tgz#aca941f6d039a3359969a6f72adef90e82095b50"
+  integrity sha512-xwE34rpkrTpjr35yu7DZB7rLyeNY0CPSJHCDXHFC/BVGOt2hEwZAKZm0VB+NsnKcDGitfJxCTPMagTBmrWgh7g==
   dependencies:
     classnames "^2.2.6"
 

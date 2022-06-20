@@ -1891,10 +1891,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-edit-text@^4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@types/react-edit-text/-/react-edit-text-4.4.0.tgz#1eca43756206f14062e923539b549c98fda74438"
-  integrity sha512-UyZImkTErncZP4AsxAuCovN7TmVpNdHEc+vyGDsVdtlObWD/7Fx5LFq+tc9VXnY2+kTmNOW6ok5yjYK1TEupGg==
+"@types/react-edit-text@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@types/react-edit-text/-/react-edit-text-4.4.1.tgz#bc4bf77cad2276a43f54fc20948b49f3307917c5"
+  integrity sha512-laxuWOhfG3QPNC5aiOnEgpqLfyLC5mWOJvYjpzpbrT+Q0+k1kFFzyMTTQhQuvj7MoNYld7XG+pOy90B8SAJZlw==
   dependencies:
     "@types/react" "*"
 
